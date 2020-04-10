@@ -5,7 +5,7 @@ const shell = require('shelljs');
 const remove = (dir, workingPath, opts) => {
   process.stdout.clearLine();
   process.stdout.cursorTo(0);
-  process.stdout.write(`CHECKING ${workingPath}`);
+  process.stdout.write(`CHECKING ${path.relative(process.cwd(), workingPath)}`);
   const dirs = fs.readdirSync(workingPath);
   dirs.forEach(item => {
     const itemPath = path.resolve(workingPath, item);
@@ -15,7 +15,9 @@ const remove = (dir, workingPath, opts) => {
       process.stdout.clearLine();
       process.stdout.cursorTo(0);
       console.info(`DELETED ${itemPath}`);
-      process.stdout.write(`CHECKING ${workingPath}`);
+      process.stdout.write(
+        `CHECKING ${path.relative(process.cwd(), workingPath)}`
+      );
     } else if (opts.recursive && stats.isDirectory()) {
       remove(dir, itemPath, opts);
     }
