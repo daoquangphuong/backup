@@ -1,4 +1,11 @@
-module.exports = function cli(args) {
-  console.log(args);
-  console.log('hello');
+const { program } = require('commander');
+const remove = require('./commands/remove');
+
+module.exports = function cli(input) {
+  program
+    .command('rm <dir>')
+    .option('-r, --recursive', 'Remove recursively')
+    .action(remove);
+
+  program.parse(input);
 };
