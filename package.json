@@ -2,6 +2,9 @@
   "name": "backup",
   "version": "1.0.0",
   "private": true,
+  "bin": {
+    "bk": "bin/bk"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "NODE_ENV=production lint-staged"
